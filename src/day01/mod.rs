@@ -1,9 +1,8 @@
-use std::fs;
+use crate::utils::get_file_contents;
 
 pub fn solve_part1(file_path: &str) -> u32 {
-    fs::read_to_string(file_path)
-        .unwrap()
-        .split("\r\n\r\n")
+    get_file_contents(file_path)
+        .split("\n\n")
         .map(|inventory_lines| {
             inventory_lines
                 .lines()
@@ -15,9 +14,8 @@ pub fn solve_part1(file_path: &str) -> u32 {
 }
 
 pub fn solve_part2(file_path: &str) -> u32 {
-    let mut inventories = fs::read_to_string(file_path)
-        .unwrap()
-        .split("\r\n\r\n")
+    let mut inventories = get_file_contents(file_path)
+        .split("\n\n")
         .into_iter()
         .map(|inventory_lines| {
             inventory_lines
