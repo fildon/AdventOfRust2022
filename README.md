@@ -1,13 +1,3 @@
 # Advent of Rust 2022
 
 These are my Rust solutions to [Advent of Code 2022](https://adventofcode.com/2022/).
-
-## Dependencies
-
-## Structure
-
-Each day exports a `solvePart1` and `solvePart2` function. They each take a single argument: a path to an input file to parse. They each return a single value (the answer), the type of which will vary from day to day.
-
-Each day has a corresponding test file `solutions.test.ts` which match the solution outputs to known correct answers.
-
-You can verify the correctness of all solutions by running `npm run test`.
