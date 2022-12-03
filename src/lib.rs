@@ -1,6 +1,7 @@
 use std::fs;
 pub mod day01caloriecounting;
 pub mod day02rockpaperscissors;
+pub mod day03rucksackreorganization;
 pub mod utils {
     use super::*;
     pub fn get_file_contents(file_path: &str) -> String {
