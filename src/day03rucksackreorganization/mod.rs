@@ -23,19 +23,21 @@ fn find_duplicate(containers: Vec<HashSet<char>>) -> char {
         .unwrap()
 }
 
+fn score(letter: char) -> u32 {
+    if letter.is_lowercase() {
+        (letter as u32) - 97 + 1
+    } else {
+        (letter as u32) - 65 + 27
+    }
+}
+
 pub fn solve_part1(file_path: &str) -> u32 {
     get_lines(file_path)
         .iter()
         .map(|line| line.chars().collect::<Vec<_>>())
         .map(split_in_half)
         .map(find_duplicate)
-        .map(|char| {
-            if char.is_lowercase() {
-                (char as u32) - 97 + 1
-            } else {
-                (char as u32) - 65 + 27
-            }
-        })
+        .map(score)
         .sum()
 }
 
@@ -47,13 +49,7 @@ pub fn solve_part2(file_path: &str) -> u32 {
         .chunks(3)
         .map(|chunk| chunk.to_vec())
         .map(find_duplicate)
-        .map(|char| {
-            if char.is_lowercase() {
-                (char as u32) - 97 + 1
-            } else {
-                (char as u32) - 65 + 27
-            }
-        })
+        .map(score)
         .sum()
 }
 
