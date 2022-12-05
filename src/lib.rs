@@ -3,6 +3,7 @@ pub mod day01caloriecounting;
 pub mod day02rockpaperscissors;
 pub mod day03rucksackreorganization;
 pub mod day04campcleanup;
+pub mod day05supplystacks;
 pub mod utils {
     use super::*;
     pub fn get_file_contents(file_path: &str) -> String {
