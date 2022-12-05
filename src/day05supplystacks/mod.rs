@@ -61,7 +61,10 @@ fn parse_file(file_path: &str) -> Job {
     }
 }
 
-fn execute_instruction(mut stacks: Vec<Stack>, instruction: &Instruction) -> Vec<Stack> {
+fn execute_instruction_with_reverse(
+    mut stacks: Vec<Stack>,
+    instruction: &Instruction,
+) -> Vec<Stack> {
     let mut moving_slice = stacks[instruction.from][..instruction.qty].to_vec();
     moving_slice.reverse();
 
@@ -70,7 +73,10 @@ fn execute_instruction(mut stacks: Vec<Stack>, instruction: &Instruction) -> Vec
 
     stacks
 }
-fn execute_instruction2(mut stacks: Vec<Stack>, instruction: &Instruction) -> Vec<Stack> {
+fn execute_instruction_without_reverse(
+    mut stacks: Vec<Stack>,
+    instruction: &Instruction,
+) -> Vec<Stack> {
     let moving_slice = stacks[instruction.from][..instruction.qty].to_vec();
 
     stacks[instruction.from] = stacks[instruction.from][instruction.qty..].to_vec();
@@ -84,7 +90,7 @@ pub fn solve_part1(file_path: &str) -> String {
 
     job.instructions
         .iter()
-        .fold(job.stacks, execute_instruction)
+        .fold(job.stacks, execute_instruction_with_reverse)
         .iter()
         .map(|stack| stack[0])
         .collect::<String>()
@@ -94,7 +100,7 @@ pub fn solve_part2(file_path: &str) -> String {
 
     job.instructions
         .iter()
-        .fold(job.stacks, execute_instruction2)
+        .fold(job.stacks, execute_instruction_without_reverse)
         .iter()
         .map(|stack| stack[0])
         .collect::<String>()
