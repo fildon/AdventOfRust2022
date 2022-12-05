@@ -70,6 +70,14 @@ fn execute_instruction(mut stacks: Vec<Stack>, instruction: &Instruction) -> Vec
 
     stacks
 }
+fn execute_instruction2(mut stacks: Vec<Stack>, instruction: &Instruction) -> Vec<Stack> {
+    let moving_slice = stacks[instruction.from][..instruction.qty].to_vec();
+
+    stacks[instruction.from] = stacks[instruction.from][instruction.qty..].to_vec();
+    stacks[instruction.to].splice(0..0, moving_slice);
+
+    stacks
+}
 
 pub fn solve_part1(file_path: &str) -> String {
     let job = parse_file(file_path);
@@ -77,6 +85,16 @@ pub fn solve_part1(file_path: &str) -> String {
     job.instructions
         .iter()
         .fold(job.stacks, execute_instruction)
+        .iter()
+        .map(|stack| stack[0])
+        .collect::<String>()
+}
+pub fn solve_part2(file_path: &str) -> String {
+    let job = parse_file(file_path);
+
+    job.instructions
+        .iter()
+        .fold(job.stacks, execute_instruction2)
         .iter()
         .map(|stack| stack[0])
         .collect::<String>()
@@ -97,15 +115,15 @@ mod tests {
             "SHMSDGZVC"
         );
     }
-    // #[test]
-    // fn part2_test_input() {
-    //     assert_eq!(solve_part2("src/day05supplystacks/input-test.txt"), "MCD");
-    // }
-    // #[test]
-    // fn part2_real_input() {
-    //     assert_eq!(
-    //         solve_part2("src/day05supplystacks/input-real.txt"),
-    //         "VRZGHDFBQ"
-    //     );
-    // }
+    #[test]
+    fn part2_test_input() {
+        assert_eq!(solve_part2("src/day05supplystacks/input-test.txt"), "MCD");
+    }
+    #[test]
+    fn part2_real_input() {
+        assert_eq!(
+            solve_part2("src/day05supplystacks/input-real.txt"),
+            "VRZGHDFBQ"
+        );
+    }
 }
